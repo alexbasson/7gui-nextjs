@@ -9,6 +9,20 @@ type FlightTypeOption = {
 }
 
 export default function FlightBooker() {
+  const dateIsValid = (date: string): boolean => {
+    const validDateRegex = new RegExp("\\d{1,2}\\/\\d{1,2}\\/\\d{4}")
+    return validDateRegex.test(date)
+  }
+
+  const dateToInt = (date: string): number => {
+    const [month, day, year] = date.split('/')
+    return parseInt(year + month + day) ?? 0
+  }
+
+  const returnDateIsAtOrAfterDepartureDate = (returnDateInput: string): boolean => {
+    return dateIsValid(returnDateInput) && dateToInt(departureDate) <= dateToInt(returnDate);
+  }
+
   const flightTypeOptions: FlightTypeOption[] = [
     {
       flightType: "one-way",
@@ -19,7 +33,6 @@ export default function FlightBooker() {
       displayValue: "return flight",
     },
   ]
-  const validDateRegex = new RegExp("\\d{1,2}\\/\\d{1,2}\\/\\d{4}")
 
   const today = (): string => {
     const date = new Date()
@@ -29,18 +42,14 @@ export default function FlightBooker() {
   const [flightType, setFlightType] = useState<FlightType>('one-way')
   const [departureDate, setDepartureDate] = useState<string>(today());
   const [returnDate, setReturnDate] = useState<string>(today());
-  const [returnDateEnabled, setReturnDateEnabled] = useState<boolean>(false)
   const [displayMessage, setDisplayMessage] = useState<boolean>(false)
   const [submitEnabled, setSubmitEnabled] = useState<boolean>(true)
-  const [departureDateValid, setDepartureDateValid] = useState<boolean>(validDateRegex.test(departureDate))
-  const [returnDateValid, setReturnDateValid] = useState<boolean>(validDateRegex.test(returnDate))
 
   const handleFlightTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault()
 
-    const inputValue = event.target.options[event.target.selectedIndex].value as FlightType ?? 'one-way'
-    setFlightType(inputValue)
-    setReturnDateEnabled(inputValue === 'return')
+    const input = event.target.options[event.target.selectedIndex].value as FlightType ?? 'one-way'
+    setFlightType(input)
   }
 
   const handleDepartureDateChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -48,8 +57,7 @@ export default function FlightBooker() {
     const input = event.target.value
 
     setDepartureDate(input)
-    setDepartureDateValid(validDateRegex.test(input))
-    setSubmitEnabled(validDateRegex.test(input))
+    setSubmitEnabled(dateIsValid(input))
   }
 
   const handleReturnDateChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -57,20 +65,7 @@ export default function FlightBooker() {
     const input = event.target.value
 
     setReturnDate(input)
-    const inputIsValidDate = validDateRegex.test(input)
-    setReturnDateValid(inputIsValidDate)
-
-    const returnDateIsValid = inputIsValidDate && returnDateIsAtOrAfterDepartureDate()
-    setSubmitEnabled(returnDateIsValid)
-  }
-
-  const dateToInt = (date: string): number => {
-    const [month, day, year] = date.split('/')
-    return parseInt(year + month + day) ?? 0
-  }
-
-  const returnDateIsAtOrAfterDepartureDate = (): boolean => {
-    return dateToInt(departureDate) <= dateToInt(returnDate);
+    setSubmitEnabled(returnDateIsAtOrAfterDepartureDate(input))
   }
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -102,7 +97,7 @@ export default function FlightBooker() {
         <input
           value={departureDate}
           onChange={handleDepartureDateChange}
-          style={{background: `${departureDateValid ? 'none' : 'red'}`}}
+          style={{background: `${dateIsValid(departureDate) ? 'none' : 'red'}`}}
           data-testid='departure-date'
         />
       </div>
@@ -111,8 +106,8 @@ export default function FlightBooker() {
         <input
           value={returnDate}
           onChange={handleReturnDateChange}
-          style={{background: `${returnDateValid ? 'none' : 'red'}`}}
-          disabled={!returnDateEnabled}
+          style={{background: `${dateIsValid(returnDate) ? 'none' : 'red'}`}}
+          disabled={flightType === 'one-way'}
           data-testid='return-date'
         />
       </div>
