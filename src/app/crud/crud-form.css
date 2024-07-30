@@ -1,0 +1,56 @@
+.m-0 {
+  margin: 0;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.p-4 {
+  padding: 4px;
+}
+
+.ph-4 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.jc-end {
+  justify-content: flex-end;
+}
+
+.jc-space-between {
+  justify-content: space-between;
+}
+
+.selected {
+  background-color: blue;
+  color: white;
+}
+
+.form {
+  width: 450px;
+  background-color: lightgray;
+  padding: 4px;
+}
+
+.ul {
+  list-style-type: none;
+  background-color: white;
+  padding: 4px 0;
+  margin: 0;
+  height: 90%;
+  overflow-y: scroll;
+}
