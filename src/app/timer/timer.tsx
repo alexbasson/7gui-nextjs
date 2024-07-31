@@ -32,20 +32,22 @@ export default function Timer() {
   }
 
   return (
-    <div>
-      <progress value={elapsedTime / duration} style={{height: '30px'}}></progress>
+    <div className='w-1/12 bg-gray-200 p-4'>
+      <div className='mb-4'>
+        <progress className='bg-blue-500 w-full h-8' value={elapsedTime / duration}></progress>
+      </div>
 
-      <div>
+      <div className='mb-4'>
         <p>Duration: {formatTime(duration)} s</p>
         <p>Elapsed time: {formatTime(elapsedTime)} s</p>
       </div>
 
-      <div>
-        <input value={duration} onChange={handleDurationChange} type='range' min='0' max='100000'/>
+      <div className='mb-4'>
+        <input className='w-full' value={duration} onChange={handleDurationChange} type='range' min='0' max='100000'/>
       </div>
 
       <div>
-      <button onClick={handleReset}>Reset</button>
+      <button className='bg-blue-500 text-white w-full rounded px-4 py-2' onClick={handleReset}>Reset</button>
       </div>
     </div>
   )

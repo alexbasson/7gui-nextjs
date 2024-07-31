@@ -80,11 +80,12 @@ export default function FlightBooker() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='w-2/12 bg-gray-200 p-4' onSubmit={handleSubmit}>
       <div>
         <select
           value={flightType}
           onChange={handleFlightTypeChange}
+          className='w-full p-2 mb-4'
           data-testid="flight-type"
         >
           {
@@ -93,27 +94,31 @@ export default function FlightBooker() {
         </select>
       </div>
 
-      <div>
+      <div className='flex justify-between'>
+        <label htmlFor='departure'>Departure date:</label>
         <input
+          name='departure'
           value={departureDate}
           onChange={handleDepartureDateChange}
-          style={{background: `${dateIsValid(departureDate) ? 'none' : 'red'}`}}
+          className={`${dateIsValid(departureDate) ? 'bg-white' : 'bg-red-500'} p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500}`}
           data-testid='departure-date'
         />
       </div>
 
-      <div>
+      <div className='flex justify-between mb-4'>
+        <label htmlFor='return'>Return date:</label>
         <input
+          name='return'
           value={returnDate}
           onChange={handleReturnDateChange}
-          style={{background: `${dateIsValid(returnDate) ? 'none' : 'red'}`}}
+          className={`${dateIsValid(returnDate) ? 'bg-white' : 'bg-red-500'} disabled:bg-slate-300 p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500}`}
           disabled={flightType === 'one-way'}
           data-testid='return-date'
         />
       </div>
 
       <div>
-        <button type='submit' disabled={!submitEnabled} data-testid='submit'>Submit</button>
+        <button type='submit' disabled={!submitEnabled} className='bg-blue-500 text-white w-full px-4 py-2 rounded' data-testid='submit'>Submit</button>
       </div>
 
       <div>

@@ -43,27 +43,27 @@ export default function TemperatureConverter() {
   }
 
   return (
-    <div>
-      <div className={"mb-4"}>
-        <label htmlFor="celsius">celsius</label>
+    <div className='w-3/12 bg-gray-200 p-4 flex justify-between align-middle'>
+      <div>
         <input
-          id="celsius"
+          name="celsius"
           value={celsius}
           onChange={onCelsiusChange}
-          className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
           data-testid='celsius'
         />
+        <label className='ml-2' htmlFor="celsius">celsius</label>
       </div>
 
       <div>
-        <label htmlFor="fahrenheit">fahrenheit</label>
         <input
-          id="fahrenheit"
+          name="fahrenheit"
           value={fahrenheit}
           onChange={onFahrenheitChange}
-          className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
           data-testid='fahrenheit'
         />
+        <label className='ml-2' htmlFor="fahrenheit">fahrenheit</label>
       </div>
     </div>
   )
