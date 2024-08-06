@@ -78,8 +78,8 @@ describe('FlightBooker', () => {
     })
 
     describe('when the form is invalid', () => {
-      beforeEach(() => {
-        fireEvent.change(departureDateTextField, { target: { value: 'not a valid date' } })
+      beforeEach(async () => {
+        await fireEvent.change(departureDateTextField, { target: { value: 'not a valid date' } })
       })
 
       it('disables the submit button', () => {
@@ -87,7 +87,7 @@ describe('FlightBooker', () => {
       })
 
       it('colors the text field red', () => {
-        expect(departureDateTextField.style.background).toContain('red')
+        expect(departureDateTextField).toHaveClass('bg-red-500')
       })
     })
   })
@@ -111,7 +111,7 @@ describe('FlightBooker', () => {
       })
 
       it('colors the text field red', () => {
-        expect(returnDateTextField.style.background).toContain('red')
+        expect(returnDateTextField).toHaveClass('bg-red-500')
       })
     })
 
