@@ -57,7 +57,7 @@ export default function CrudForm() {
   }
 
   return (
-    <form className={'w-3/12 p-4 bg-gray-200'}>
+    <form className={'p-4 bg-gray-200'}>
       <div className={'mb-4'}>
         <label htmlFor="filter" className={'mr-4'}>Filter prefix:</label>
         <input name="filter" value={filter} onChange={event => setFilter(event.target.value)} />

@@ -10,7 +10,7 @@ export default function Counter() {
   }
 
   return (
-    <div className='w-1/12 bg-gray-200 p-4'>
+    <div className='w-1/2 bg-gray-200 p-4'>
       <div>
         <p className='mb-4' data-testid="label">Count: {count}</p>
       </div>

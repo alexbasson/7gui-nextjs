@@ -80,7 +80,7 @@ export default function FlightBooker() {
   }
 
   return (
-    <form className='w-2/12 bg-gray-200 p-4' onSubmit={handleSubmit}>
+    <form className='w-2/3 bg-gray-200 p-4' onSubmit={handleSubmit}>
       <div>
         <select
           value={flightType}

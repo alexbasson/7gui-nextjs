@@ -43,7 +43,7 @@ export default function TemperatureConverter() {
   }
 
   return (
-    <div className='w-3/12 bg-gray-200 p-4 flex justify-between align-middle'>
+    <div className='bg-gray-200 p-4 flex justify-between align-middle'>
       <div>
         <input
           name="celsius"
