@@ -58,11 +58,15 @@ export default function CrudForm({ repository }: CrudFormProps) {
     setSelectedId(-1)
   }
 
+  const bySurname = (person: Person): boolean => {
+    return filter === '' || person.surname.toLowerCase().includes(filter.toLowerCase())
+  }
+
   return (
     <form className={'p-4 bg-gray-200'}>
       <div className={'mb-4'}>
         <label htmlFor="filter" className={'mr-4'}>Filter prefix:</label>
-        <input name="filter" value={filter} onChange={event => setFilter(event.target.value)} />
+        <input id="filter" value={filter} onChange={event => setFilter(event.target.value)} />
       </div>
 
       <div className='grid grid-cols-2 gap-4'>
@@ -70,10 +74,11 @@ export default function CrudForm({ repository }: CrudFormProps) {
           <ul className={'h-4/5 list-none bg-white overflow-y-scroll'}>
             {
               persons
-                .filter((person) => (filter === '' || person.surname.includes(filter)))
+                .filter(bySurname)
                 .map((person) => (
                   <li key={person.id}
                       value={person.id}
+                      data-testid='person'
                       onClick={event => setSelectedId(event.currentTarget.value)}
                       className={`px-2 ${selectedId === person.id ? 'bg-blue-500 text-white' : ''}`}
                   >
@@ -86,13 +91,13 @@ export default function CrudForm({ repository }: CrudFormProps) {
 
         <div>
           <div className={'flex justify-end mb-4'}>
-            <label htmlFor="name" className={'mr-8'}>Name: </label>
-            <input name="name" value={name} onChange={event => setName(event.target.value)} />
+            <label htmlFor="name" className={'mr-8'}>Name:</label>
+            <input id="name" value={name} onChange={event => setName(event.target.value)} />
           </div>
 
           <div className={'flex justify-end'}>
-            <label htmlFor="surname" className={'mr-8'}>Surname: </label>
-            <input name="surname" value={surname} onChange={event => setSurname(event.target.value)} />
+            <label htmlFor="surname" className={'mr-8'}>Surname:</label>
+            <input id="surname" value={surname} onChange={event => setSurname(event.target.value)} />
           </div>
         </div>
 
