@@ -1,10 +1,10 @@
 'use client'
 
-import CrudForm from "@/app/crud/crud-form";
-import NameRepository from "@/app/crud/name-repository";
+import CrudForm from "@/app/crud/CrudForm";
+import PersonsRepository from "@/app/crud/PersonsRepository";
 
 export default function Page() {
-  const repository = new NameRepository();
+  const repository = new PersonsRepository();
 
   return (
     <CrudForm repository={repository} />

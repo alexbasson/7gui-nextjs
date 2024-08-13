@@ -1,6 +1,6 @@
 import {Person} from "@/app/crud/Person";
 
-export default class NameRepository {
+export default class PersonsRepository {
   private id: number = 1
   private persons: Person[] = []
 

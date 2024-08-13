@@ -1,10 +1,10 @@
-import NameRepository from "@/app/crud/name-repository";
+import PersonsRepository from "@/app/crud/PersonsRepository";
 
-describe('NameRepository', () => {
-  let repository: NameRepository;
+describe('PersonsRepository', () => {
+  let repository: PersonsRepository;
 
   beforeEach(() => {
-    repository = new NameRepository();
+    repository = new PersonsRepository();
   })
 
   it('performs CRUD operations on names', () => {

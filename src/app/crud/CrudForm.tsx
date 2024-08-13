@@ -2,10 +2,10 @@
 
 import {MouseEvent, useState} from "react";
 import {Person} from "@/app/crud/Person";
-import NameRepository from "@/app/crud/name-repository";
+import PersonsRepository from "@/app/crud/PersonsRepository";
 
 type CrudFormProps = {
-  repository: NameRepository,
+  repository: PersonsRepository,
 }
 
 export default function CrudForm({ repository }: CrudFormProps) {
