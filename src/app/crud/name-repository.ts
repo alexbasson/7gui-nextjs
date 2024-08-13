@@ -1,31 +1,34 @@
-import {Name} from "@/app/crud/name";
+import {Person} from "@/app/crud/Person";
 
 export default class NameRepository {
-  private names: Name[] = []
+  private id: number = 1
+  private persons: Person[] = []
 
-  public allNames(): Name[] {
-    return this.names
+  public allNames(): Person[] {
+    return this.persons
   }
 
-  public create(first: string, last: string): Name[] {
-    this.names.push({
-      first: first,
-      last: last,
+  public create(first: string, last: string): Person[] {
+    this.persons.push({
+      id: this.id,
+      name: first,
+      surname: last,
     })
-    return this.names
+    this.id++
+    return this.persons
   }
 
-  public update(name: Name, newFirst: string, newLast: string): Name[] {
-    this.names.splice(this.indexOf(name), 1, {first: newFirst, last: newLast})
-    return this.names
+  public update(id: number, newFirst: string, newLast: string): Person[] {
+    this.persons.splice(this.indexOf(id), 1, {id: id, name: newFirst, surname: newLast})
+    return this.persons
   }
 
-  public delete(name: Name): Name[] {
-    this.names.splice(this.indexOf(name), 1)
-    return this.names
+  public delete(id: number): Person[] {
+    this.persons.splice(this.indexOf(id), 1)
+    return this.persons
   }
 
-  private indexOf(name: Name): number {
-    return this.names.findIndex(n => n.first === name.first && n.last === name.last)
+  private indexOf(id: number): number {
+    return this.persons.findIndex(person => id === person.id)
   }
 }

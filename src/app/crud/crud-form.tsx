@@ -1,59 +1,59 @@
 'use client'
 
 import {MouseEvent, useState} from "react";
-import {Name} from "@/app/crud/name";
+import {Person} from "@/app/crud/Person";
 import NameRepository from "@/app/crud/name-repository";
 
 const repository = new NameRepository();
 
 export default function CrudForm() {
-  const [names, setNames] = useState<Name[]>(repository.allNames())
-  const [firstName, setFirstName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
+  const [persons, setPersons] = useState<Person[]>(repository.allNames())
+  const [name, setName] = useState<string>('');
+  const [surname, setSurname] = useState<string>('');
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedId, setSelectedId] = useState(-1);
   const [filter, setFilter] = useState<string>('');
 
   const outOfRange = (index: number) => {
-    return index < 0 || index > names.length - 1;
+    return index < 0 || index > persons.length - 1;
   }
 
   const handleCreate = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
-    if (firstName.length > 0 && lastName.length > 0) {
-      setNames(repository.create(firstName, lastName))
-      setSelectedIndex(-1)
-      setFirstName('')
-      setLastName('')
+    if (name.length > 0 && surname.length > 0) {
+      setPersons(repository.create(name, surname))
+      setSelectedId(-1)
+      setName('')
+      setSurname('')
     }
   }
 
   const handleUpdate = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
-    if (outOfRange(selectedIndex)) {
+    if (outOfRange(selectedId)) {
       return
     }
 
-    if (firstName.length > 0 && lastName.length > 0) {
-      setNames(repository.update(names[selectedIndex], firstName, lastName))
-      setFirstName('')
-      setLastName('')
+    if (name.length > 0 && surname.length > 0) {
+      setPersons(repository.update(selectedId, name, surname))
+      setName('')
+      setSurname('')
     }
   }
 
   const handleDelete = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
-    if (outOfRange(selectedIndex)) {
+    if (outOfRange(selectedId)) {
       return
     }
 
-    setNames(repository.delete(names[selectedIndex]))
-    setFirstName('')
-    setLastName('')
-    setSelectedIndex(-1)
+    setPersons(repository.delete(selectedId))
+    setName('')
+    setSurname('')
+    setSelectedId(-1)
   }
 
   return (
@@ -67,15 +67,15 @@ export default function CrudForm() {
         <div className={'m-0'} style={{height: '100px'}}>
           <ul className={'h-4/5 list-none bg-white overflow-y-scroll'}>
             {
-              names
-                .filter((name) => (filter === '' || name.last.includes(filter)))
-                .map((name, index) => (
-                  <li key={index}
-                      value={index}
-                      onClick={event => setSelectedIndex(event.currentTarget.value)}
-                      className={`px-2 ${selectedIndex === index ? 'bg-blue-500 text-white' : ''}`}
+              persons
+                .filter((person) => (filter === '' || person.surname.includes(filter)))
+                .map((person) => (
+                  <li key={person.id}
+                      value={person.id}
+                      onClick={event => setSelectedId(event.currentTarget.value)}
+                      className={`px-2 ${selectedId === person.id ? 'bg-blue-500 text-white' : ''}`}
                   >
-                    {name.first} {name.last}
+                    {person.name} {person.surname}
                   </li>
                 ))
             }
@@ -84,20 +84,20 @@ export default function CrudForm() {
 
         <div>
           <div className={'flex justify-end mb-4'}>
-            <label htmlFor="firstName" className={'mr-8'}>First: </label>
-            <input name="firstName" value={firstName} onChange={event => setFirstName(event.target.value)} />
+            <label htmlFor="name" className={'mr-8'}>Name: </label>
+            <input name="name" value={name} onChange={event => setName(event.target.value)} />
           </div>
 
           <div className={'flex justify-end'}>
-            <label htmlFor="lastName" className={'mr-8'}>Last: </label>
-            <input name="lastName" value={lastName} onChange={event => setLastName(event.target.value)} />
+            <label htmlFor="surname" className={'mr-8'}>Surname: </label>
+            <input name="surname" value={surname} onChange={event => setSurname(event.target.value)} />
           </div>
         </div>
 
         <div className={'flex justify-between'}>
           <button className='bg-blue-500 text-white rounded px-4 py-2' onClick={handleCreate}>Create</button>
-          <button className='bg-blue-500 text-white rounded px-4 py-2' onClick={handleUpdate} disabled={outOfRange(selectedIndex)}>Update</button>
-          <button className='bg-blue-500 text-white rounded px-4 py-2' onClick={handleDelete} disabled={outOfRange(selectedIndex)}>Delete</button>
+          <button className='bg-blue-500 text-white rounded px-4 py-2' onClick={handleUpdate} disabled={outOfRange(selectedId)}>Update</button>
+          <button className='bg-blue-500 text-white rounded px-4 py-2' onClick={handleDelete} disabled={outOfRange(selectedId)}>Delete</button>
         </div>
       </div>
     </form>

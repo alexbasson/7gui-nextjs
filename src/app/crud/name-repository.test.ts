@@ -12,43 +12,43 @@ describe('NameRepository', () => {
 
     repository.create("Alice", "Awesome")
     expect(repository.allNames()).toStrictEqual([
-      {first: "Alice", last: "Awesome"},
+      {id: 1, name: "Alice", surname: "Awesome"},
     ])
 
     repository.create("Bob", "Builder")
     expect(repository.allNames()).toStrictEqual([
-      {first: "Alice", last: "Awesome"},
-      {first: "Bob", last: "Builder"},
+      {id: 1, name: "Alice", surname: "Awesome"},
+      {id: 2, name: "Bob", surname: "Builder"},
     ])
 
     repository.create("Carlos", "Cool")
     expect(repository.allNames()).toStrictEqual([
-      {first: "Alice", last: "Awesome"},
-      {first: "Bob", last: "Builder"},
-      {first: "Carlos", last: "Cool"},
+      {id: 1, name: "Alice", surname: "Awesome"},
+      {id: 2, name: "Bob", surname: "Builder"},
+      {id: 3, name: "Carlos", surname: "Cool"},
     ])
 
     repository.create("Dana", "Daring")
     expect(repository.allNames()).toStrictEqual([
-      {first: "Alice", last: "Awesome"},
-      {first: "Bob", last: "Builder"},
-      {first: "Carlos", last: "Cool"},
-      {first: "Dana", last: "Daring"},
+      {id: 1, name: "Alice", surname: "Awesome"},
+      {id: 2, name: "Bob", surname: "Builder"},
+      {id: 3, name: "Carlos", surname: "Cool"},
+      {id: 4, name: "Dana", surname: "Daring"},
     ])
 
-    repository.update({first: "Bob", last: "Builder"}, "Edna", "Excellent")
+    repository.update(2, "Edna", "Excellent")
     expect(repository.allNames()).toStrictEqual([
-      {first: "Alice", last: "Awesome"},
-      {first: "Edna", last: "Excellent"},
-      {first: "Carlos", last: "Cool"},
-      {first: "Dana", last: "Daring"},
+      {id: 1, name: "Alice", surname: "Awesome"},
+      {id: 2, name: "Edna", surname: "Excellent"},
+      {id: 3, name: "Carlos", surname: "Cool"},
+      {id: 4, name: "Dana", surname: "Daring"},
     ])
 
-    repository.delete({first: "Carlos", last: "Cool"})
+    repository.delete(3)
     expect(repository.allNames()).toStrictEqual([
-      {first: "Alice", last: "Awesome"},
-      {first: "Edna", last: "Excellent"},
-      {first: "Dana", last: "Daring"},
+      {id: 1, name: "Alice", surname: "Awesome"},
+      {id: 2, name: "Edna", surname: "Excellent"},
+      {id: 4, name: "Dana", surname: "Daring"},
     ])
   })
 })
