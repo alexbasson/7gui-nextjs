@@ -2,14 +2,14 @@
 
 import {MouseEvent, useState} from "react";
 import {Person} from "@/app/crud/Person";
-import PersonsRepository from "@/app/crud/PersonsRepository";
+import {PersonsRepository} from "@/app/crud/PersonsRepository";
 
 type CrudFormProps = {
   repository: PersonsRepository,
 }
 
 export default function CrudForm({ repository }: CrudFormProps) {
-  const [persons, setPersons] = useState<Person[]>(repository.allNames())
+  const [persons, setPersons] = useState<Person[]>(repository.getAll())
   const [name, setName] = useState<string>('');
   const [surname, setSurname] = useState<string>('');
 
