@@ -38,7 +38,7 @@ export default function TimerComponent({ timer, interval, defaultDuration }: Tim
   }
 
   return (
-    <div className='w-1/2 bg-gray-200 p-4'>
+    <div className='w-1/2 card'>
       <div className='mb-4'>
         <progress data-testid='progress-bar' className='bg-blue-500 w-full h-8' value={elapsedTime / duration}></progress>
       </div>
@@ -53,7 +53,7 @@ export default function TimerComponent({ timer, interval, defaultDuration }: Tim
       </div>
 
       <div>
-        <button className='bg-blue-500 text-white w-full rounded px-4 py-2' onClick={handleReset}>Reset</button>
+        <button className='w-full btn' onClick={handleReset}>Reset</button>
       </div>
     </div>
   )

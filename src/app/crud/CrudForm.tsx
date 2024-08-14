@@ -16,10 +16,6 @@ export default function CrudForm({ repository }: CrudFormProps) {
   const [selectedId, setSelectedId] = useState(-1);
   const [filter, setFilter] = useState<string>('');
 
-  const outOfRange = (index: number) => {
-    return index < 0 || index > persons.length - 1;
-  }
-
   const handleCreate = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
@@ -35,10 +31,6 @@ export default function CrudForm({ repository }: CrudFormProps) {
   const handleUpdate = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
-    if (outOfRange(selectedId)) {
-      return
-    }
-
     if (name.length > 0 && surname.length > 0) {
       await repository.update(selectedId, name, surname)
       setName('')
@@ -49,10 +41,6 @@ export default function CrudForm({ repository }: CrudFormProps) {
 
   const handleDelete = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-
-    if (outOfRange(selectedId)) {
-      return
-    }
 
     await repository.delete(selectedId)
     setName('')
@@ -66,15 +54,15 @@ export default function CrudForm({ repository }: CrudFormProps) {
   }
 
   return (
-    <form className={'p-4 bg-gray-200'}>
-      <div className={'mb-4'}>
-        <label htmlFor="filter" className={'mr-4'}>Filter prefix:</label>
-        <input id="filter" value={filter} onChange={event => setFilter(event.target.value)} />
+    <form className='card'>
+      <div className='mb-4'>
+        <label htmlFor="filter" className='mr-4'>Filter prefix:</label>
+        <input id="filter" className='rounded' value={filter} onChange={event => setFilter(event.target.value)} />
       </div>
 
       <div className='grid grid-cols-2 gap-4'>
-        <div className={'m-0'} style={{height: '100px'}}>
-          <ul className={'h-4/5 list-none bg-white overflow-y-scroll'}>
+        <div className='m-0' style={{height: '100px'}}>
+          <ul className='h-4/5 list-none bg-white overflow-y-scroll'>
             {
               persons
                 .filter(bySurname)
@@ -93,21 +81,21 @@ export default function CrudForm({ repository }: CrudFormProps) {
         </div>
 
         <div>
-          <div className={'flex justify-end mb-4'}>
-            <label htmlFor="name" className={'mr-8'}>Name:</label>
-            <input id="name" value={name} onChange={event => setName(event.target.value)} />
+          <div className='flex justify-end mb-4'>
+            <label htmlFor="name" className='mr-8'>Name:</label>
+            <input id="name" className='rounded' value={name} onChange={event => setName(event.target.value)} />
           </div>
 
-          <div className={'flex justify-end'}>
-            <label htmlFor="surname" className={'mr-8'}>Surname:</label>
-            <input id="surname" value={surname} onChange={event => setSurname(event.target.value)} />
+          <div className='flex justify-end'>
+            <label htmlFor="surname" className='mr-8'>Surname:</label>
+            <input id="surname" className='rounded' value={surname} onChange={event => setSurname(event.target.value)} />
           </div>
         </div>
 
-        <div className={'flex justify-between'}>
-          <button className='bg-blue-500 text-white rounded px-4 py-2' onClick={handleCreate}>Create</button>
-          <button className='bg-blue-500 text-white rounded px-4 py-2' onClick={handleUpdate} disabled={outOfRange(selectedId)}>Update</button>
-          <button className='bg-blue-500 text-white rounded px-4 py-2' onClick={handleDelete} disabled={outOfRange(selectedId)}>Delete</button>
+        <div className='flex justify-between'>
+          <button className='btn' onClick={handleCreate}>Create</button>
+          <button className='btn' onClick={handleUpdate}>Update</button>
+          <button className='btn' onClick={handleDelete}>Delete</button>
         </div>
       </div>
     </form>

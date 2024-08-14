@@ -17,11 +17,11 @@ export default function RootLayout({
         <div className="w-[60rem] mx-auto">
           <div className="w-[19rem] float-left pr-8">
             <ul>
-              <li className={(currentPath === "/counter" ? "font-semibold bg-blue-300" : "text-black") + " py-2 px-4 hover:bg-gray-100"}><Link href="/counter">Counter</Link></li>
-              <li className={(currentPath === "/temperature-converter" ? "font-semibold bg-blue-300" : "text-black") + " py-2 px-4 hover:bg-gray-100"}><Link href="/temperature-converter">Temperature Converter</Link></li>
-              <li className={(currentPath === "/flight-booker" ? "font-semibold bg-blue-300" : "text-black") + " py-2 px-4 hover:bg-gray-100"}><Link href="/flight-booker">Flight Booker</Link></li>
-              <li className={(currentPath === "/timer" ? "font-semibold bg-blue-300" : "text-black") + " py-2 px-4 hover:bg-gray-100"}><Link href="/timer">Timer</Link></li>
-              <li className={(currentPath === "/crud" ? "font-semibold bg-blue-300" : "text-black") + " py-2 px-4 hover:bg-gray-100"}><Link href="/crud">CRUD</Link></li>
+              <li className={(currentPath === "/counter" ? "nav-link-active" : "nav-link-inactive") + " nav-link"}><Link href="/counter">Counter</Link></li>
+              <li className={(currentPath === "/temperature-converter" ? "nav-link-active" : "nav-link-inactive") + " nav-link"}><Link href="/temperature-converter">Temperature Converter</Link></li>
+              <li className={(currentPath === "/flight-booker" ? "nav-link-active" : "nav-link-inactive") + " nav-link"}><Link href="/flight-booker">Flight Booker</Link></li>
+              <li className={(currentPath === "/timer" ? "nav-link-active" : "nav-link-inactive") + " nav-link"}><Link href="/timer">Timer</Link></li>
+              <li className={(currentPath === "/crud" ? "nav-link-active" : "nav-link-inactive") + " nav-link"}><Link href="/crud">CRUD</Link></li>
             </ul>
           </div>
           <div className="w-[41rem] ml-[19rem]">

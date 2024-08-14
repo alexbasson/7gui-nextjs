@@ -10,13 +10,13 @@ export default function Counter() {
   }
 
   return (
-    <div className='w-1/2 bg-gray-200 p-4'>
+    <div className='w-1/2 card'>
       <div>
         <p className='mb-4' data-testid="label">Count: {count}</p>
       </div>
 
       <div>
-        <button className='bg-blue-500 text-white w-full rounded px-4 py-2' onClick={handleClick}>Count</button>
+        <button className='w-full btn' onClick={handleClick}>Count</button>
       </div>
     </div>
   )

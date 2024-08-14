@@ -43,27 +43,29 @@ export default function TemperatureConverter() {
   }
 
   return (
-    <div className='bg-gray-200 p-4 flex justify-between align-middle'>
-      <div>
-        <input
-          name="celsius"
-          value={celsius}
-          onChange={onCelsiusChange}
-          className="p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-          data-testid='celsius'
-        />
-        <label className='ml-2' htmlFor="celsius">celsius</label>
-      </div>
+    <div className='card'>
+      <div className='flex justify-between align-middle'>
+        <div>
+          <input
+            id="celsius"
+            value={celsius}
+            onChange={onCelsiusChange}
+            className="p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            data-testid='celsius'
+          />
+          <label className='ml-2' htmlFor="celsius">celsius</label>
+        </div>
 
-      <div>
-        <input
-          name="fahrenheit"
-          value={fahrenheit}
-          onChange={onFahrenheitChange}
-          className="p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-          data-testid='fahrenheit'
-        />
-        <label className='ml-2' htmlFor="fahrenheit">fahrenheit</label>
+        <div>
+          <input
+            id="fahrenheit"
+            value={fahrenheit}
+            onChange={onFahrenheitChange}
+            className="p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            data-testid='fahrenheit'
+          />
+          <label className='ml-2' htmlFor="fahrenheit">fahrenheit</label>
+        </div>
       </div>
     </div>
   )
