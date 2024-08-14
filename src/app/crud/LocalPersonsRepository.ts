@@ -5,28 +5,34 @@ export default class LocalPersonsRepository implements PersonsRepository {
   private id: number = 1
   private persons: Person[] = []
 
-  getAll(): Person[] {
-    return this.persons
-  }
-
-  create(first: string, last: string): Person[] {
-    this.persons.push({
-      id: this.id,
-      name: first,
-      surname: last,
+  getAll(): Promise<Person[]> {
+    return new Promise((resolve) => {
+      resolve(this.persons)
     })
-    this.id++
-    return this.persons
   }
 
-  update(id: number, newFirst: string, newLast: string): Person[] {
-    this.persons.splice(this.indexOf(id), 1, {id: id, name: newFirst, surname: newLast})
-    return this.persons
+  create(name: string, surname: string): Promise<Person> {
+    return new Promise((resolve) => {
+      const newPerson = {id: this.id, name, surname}
+      this.persons.push(newPerson)
+      this.id++
+      resolve(newPerson)
+    })
   }
 
-  delete(id: number): Person[] {
-    this.persons.splice(this.indexOf(id), 1)
-    return this.persons
+  update(id: number, name: string, surname: string): Promise<Person> {
+    return new Promise((resolve) => {
+      const person = {id: id, name, surname};
+      this.persons.splice(this.indexOf(id), 1, person)
+      resolve(person)
+    })
+  }
+
+  delete(id: number): Promise<void> {
+    return new Promise((resolve) => {
+      this.persons.splice(this.indexOf(id), 1)
+      resolve()
+    })
   }
 
   private indexOf(id: number): number {

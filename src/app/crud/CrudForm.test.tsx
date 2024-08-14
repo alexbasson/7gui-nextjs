@@ -1,6 +1,7 @@
 import CrudForm from "@/app/crud/CrudForm";
 import LocalPersonsRepository from "@/app/crud/LocalPersonsRepository";
 import {fireEvent, render, screen} from "@testing-library/react";
+import {act} from "react";
 
 describe('CrudForm', () => {
   let nameInput: HTMLInputElement;
@@ -32,17 +33,17 @@ describe('CrudForm', () => {
   })
 
   describe('creating persons', () => {
-    it('adds the persons to the list', () => {
-      createPerson('Alice', 'Awesome')
+    it('adds the persons to the list', async () => {
+      await createPerson('Alice', 'Awesome')
       expect(screen.getAllByTestId('person').length).toBe(1)
       expect(personListItemAtIndex(0).textContent).toBe('Alice Awesome')
 
-      createPerson('Bob', 'Builder')
+      await createPerson('Bob', 'Builder')
       expect(screen.getAllByTestId('person').length).toBe(2)
       expect(personListItemAtIndex(0).textContent).toBe('Alice Awesome')
       expect(personListItemAtIndex(1).textContent).toBe('Bob Builder')
 
-      createPerson('Clara', 'Creative')
+      await createPerson('Clara', 'Creative')
       expect(screen.getAllByTestId('person').length).toBe(3)
       expect(personListItemAtIndex(0).textContent).toBe('Alice Awesome')
       expect(personListItemAtIndex(1).textContent).toBe('Bob Builder')
@@ -51,10 +52,10 @@ describe('CrudForm', () => {
   })
 
   describe('updating persons', () => {
-    it('updates the selected person', () => {
-      createPerson('Alice', 'Awesome')
-      createPerson('Bob', 'Builder')
-      createPerson('Clara', 'Creative')
+    it('updates the selected person', async () => {
+      await createPerson('Alice', 'Awesome')
+      await createPerson('Bob', 'Builder')
+      await createPerson('Clara', 'Creative')
 
       expect(screen.getAllByTestId('person').length).toBe(3)
       expect(personListItemAtIndex(0).textContent).toBe('Alice Awesome')
@@ -66,7 +67,7 @@ describe('CrudForm', () => {
       fireEvent.change(nameInput, {target: {value: 'Barb'}})
       fireEvent.change(surnameInput, {target: {value: 'Busy'}})
 
-      fireEvent.click(updateButton)
+      await act(async () => await fireEvent.click(updateButton))
       expect(nameInput.value).toBe('')
       expect(surnameInput.value).toBe('')
 
@@ -77,10 +78,10 @@ describe('CrudForm', () => {
   })
 
   describe('deleting persons', () => {
-    it('removes the selected person from the list', () => {
-      createPerson('Alice', 'Awesome')
-      createPerson('Bob', 'Builder')
-      createPerson('Clara', 'Creative')
+    it('removes the selected person from the list', async () => {
+      await createPerson('Alice', 'Awesome')
+      await createPerson('Bob', 'Builder')
+      await createPerson('Clara', 'Creative')
 
       expect(screen.getAllByTestId('person').length).toBe(3)
       expect(personListItemAtIndex(0).textContent).toBe('Alice Awesome')
@@ -89,7 +90,7 @@ describe('CrudForm', () => {
 
       fireEvent.click(personListItemAtIndex(1))
 
-      fireEvent.click(deleteButton)
+      await act(async () => await fireEvent.click(deleteButton))
 
       expect(screen.getAllByTestId('person').length).toBe(2)
       expect(personListItemAtIndex(0).textContent).toBe('Alice Awesome')
@@ -97,12 +98,12 @@ describe('CrudForm', () => {
     })
   })
 
-  describe('filtering the persons list', () => {
-    it('displays only the persons who match the filter prefix', () => {
-      createPerson('Alice', 'Awesome')
-      createPerson('Bob', 'Builder')
-      createPerson('Clara', 'Creative')
-      createPerson('Barb', 'Busy')
+  describe('filtering the persons list',  () => {
+    it('displays only the persons who match the filter prefix', async () => {
+      await createPerson('Alice', 'Awesome')
+      await createPerson('Bob', 'Builder')
+      await createPerson('Clara', 'Creative')
+      await createPerson('Barb', 'Busy')
 
       expect(screen.getAllByTestId('person').length).toBe(4)
       expect(personListItemAtIndex(0).textContent).toBe('Alice Awesome')
@@ -118,11 +119,11 @@ describe('CrudForm', () => {
     })
   })
 
-  const createPerson = (name: string, surname: string) => {
+  const createPerson = async (name: string, surname: string) => {
     fireEvent.change(nameInput, {target: {value: name}})
     fireEvent.change(surnameInput, {target: {value: surname}})
 
-    fireEvent.click(createButton)
+    await act(async () => await fireEvent.click(createButton))
 
     expect(nameInput.value).toBe('')
     expect(surnameInput.value).toBe('')

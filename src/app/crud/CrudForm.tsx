@@ -9,7 +9,7 @@ type CrudFormProps = {
 }
 
 export default function CrudForm({ repository }: CrudFormProps) {
-  const [persons, setPersons] = useState<Person[]>(repository.getAll())
+  const [persons, setPersons] = useState<Person[]>([])
   const [name, setName] = useState<string>('');
   const [surname, setSurname] = useState<string>('');
 
@@ -20,18 +20,19 @@ export default function CrudForm({ repository }: CrudFormProps) {
     return index < 0 || index > persons.length - 1;
   }
 
-  const handleCreate = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleCreate = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     if (name.length > 0 && surname.length > 0) {
-      setPersons(repository.create(name, surname))
+      await repository.create(name, surname)
       setSelectedId(-1)
       setName('')
       setSurname('')
+      setPersons(await repository.getAll())
     }
   }
 
-  const handleUpdate = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleUpdate = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     if (outOfRange(selectedId)) {
@@ -39,23 +40,25 @@ export default function CrudForm({ repository }: CrudFormProps) {
     }
 
     if (name.length > 0 && surname.length > 0) {
-      setPersons(repository.update(selectedId, name, surname))
+      await repository.update(selectedId, name, surname)
       setName('')
       setSurname('')
+      setPersons(await repository.getAll())
     }
   }
 
-  const handleDelete = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleDelete = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     if (outOfRange(selectedId)) {
       return
     }
 
-    setPersons(repository.delete(selectedId))
+    await repository.delete(selectedId)
     setName('')
     setSurname('')
     setSelectedId(-1)
+    setPersons(await repository.getAll())
   }
 
   const bySurname = (person: Person): boolean => {

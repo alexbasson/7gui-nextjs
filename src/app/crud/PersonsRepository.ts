@@ -1,8 +1,8 @@
 import {Person} from "@/app/crud/Person";
 
 export interface PersonsRepository {
-  getAll: () => Person[];
-  create: (first: string, last: string) => Person[];
-  update: (id: number, newFirst: string, newLast: string) => Person[];
-  delete: (id: number) => Person[];
+  getAll: () => Promise<Person[]>;
+  create: (name: string, surname: string) => Promise<Person>;
+  update: (id: number, name: string, surname: string) => Promise<Person>;
+  delete: (id: number) => Promise<void>;
 }

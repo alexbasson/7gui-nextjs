@@ -7,45 +7,45 @@ describe('PersonsRepository', () => {
     repository = new LocalPersonsRepository();
   })
 
-  it('performs CRUD operations on names', () => {
-    expect(repository.getAll()).toStrictEqual([]);
+  it('performs CRUD operations on persons', async () => {
+    expect(await repository.getAll()).toStrictEqual([]);
 
-    repository.create("Alice", "Awesome")
-    expect(repository.getAll()).toStrictEqual([
+    await repository.create("Alice", "Awesome")
+    expect(await repository.getAll()).toStrictEqual([
       {id: 1, name: "Alice", surname: "Awesome"},
     ])
 
-    repository.create("Bob", "Builder")
-    expect(repository.getAll()).toStrictEqual([
+    await repository.create("Bob", "Builder")
+    expect(await repository.getAll()).toStrictEqual([
       {id: 1, name: "Alice", surname: "Awesome"},
       {id: 2, name: "Bob", surname: "Builder"},
     ])
 
-    repository.create("Carlos", "Cool")
-    expect(repository.getAll()).toStrictEqual([
+    await repository.create("Carlos", "Cool")
+    expect(await repository.getAll()).toStrictEqual([
       {id: 1, name: "Alice", surname: "Awesome"},
       {id: 2, name: "Bob", surname: "Builder"},
       {id: 3, name: "Carlos", surname: "Cool"},
     ])
 
-    repository.create("Dana", "Daring")
-    expect(repository.getAll()).toStrictEqual([
+    await repository.create("Dana", "Daring")
+    expect(await repository.getAll()).toStrictEqual([
       {id: 1, name: "Alice", surname: "Awesome"},
       {id: 2, name: "Bob", surname: "Builder"},
       {id: 3, name: "Carlos", surname: "Cool"},
       {id: 4, name: "Dana", surname: "Daring"},
     ])
 
-    repository.update(2, "Edna", "Excellent")
-    expect(repository.getAll()).toStrictEqual([
+    await repository.update(2, "Edna", "Excellent")
+    expect(await repository.getAll()).toStrictEqual([
       {id: 1, name: "Alice", surname: "Awesome"},
       {id: 2, name: "Edna", surname: "Excellent"},
       {id: 3, name: "Carlos", surname: "Cool"},
       {id: 4, name: "Dana", surname: "Daring"},
     ])
 
-    repository.delete(3)
-    expect(repository.getAll()).toStrictEqual([
+    await repository.delete(3)
+    expect(await repository.getAll()).toStrictEqual([
       {id: 1, name: "Alice", surname: "Awesome"},
       {id: 2, name: "Edna", surname: "Excellent"},
       {id: 4, name: "Dana", surname: "Daring"},
