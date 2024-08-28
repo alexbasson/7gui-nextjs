@@ -1,20 +1,6 @@
 import {render, screen} from "@testing-library/react";
 import PostList from "@/app/blog/PostList";
-import mockPosts from './mockPosts.json'
-import mockUsers from './mockUsers.json'
-import ApiClient from "@/app/blog/ApiClient";
-import {Post} from "@/app/blog/Post";
-import {User} from "@/app/blog/User";
-
-class MockApiClient implements ApiClient {
-  getAllPosts = (): Promise<Post[]> => {
-    return Promise.resolve(mockPosts);
-  }
-
-  getAllUsers = (): Promise<User[]> => {
-    return Promise.resolve(mockUsers);
-  }
-}
+import MockApiClient from "@/app/blog/MockApiClient";
 
 describe('PostList', () => {
   beforeEach(async () => {
