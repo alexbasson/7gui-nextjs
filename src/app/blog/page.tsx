@@ -1,5 +1,3 @@
-'use client'
-
 import PostList from "@/app/blog/PostList";
 import HttpApiClient from "@/app/blog/HttpApiClient";
 

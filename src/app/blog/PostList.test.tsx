@@ -5,7 +5,6 @@ import mockUsers from './mockUsers.json'
 import ApiClient from "@/app/blog/ApiClient";
 import {Post} from "@/app/blog/Post";
 import {User} from "@/app/blog/User";
-import {act} from "react";
 
 class MockApiClient implements ApiClient {
   getAllPosts = (): Promise<Post[]> => {
@@ -19,7 +18,7 @@ class MockApiClient implements ApiClient {
 
 describe('PostList', () => {
   beforeEach(async () => {
-    await act(async () => render(<PostList apiClient={new MockApiClient()}/>))
+    render(await PostList({apiClient: new MockApiClient()}))
   })
 
   describe('displaying posts', () => {

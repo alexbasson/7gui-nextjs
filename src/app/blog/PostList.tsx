@@ -1,12 +1,5 @@
-'use client'
-
 import ApiClient from "@/app/blog/ApiClient";
-import {useEffect, useState} from "react";
 import {Post} from "@/app/blog/Post";
-
-type PostListProps = {
-  apiClient: ApiClient,
-}
 
 type PostRow = {
   id: number;
@@ -14,26 +7,19 @@ type PostRow = {
   author: string;
 }
 
-export default function PostList({apiClient}: PostListProps) {
-  const [postRows, setPostRows] = useState<PostRow[]>([])
+export default async function PostList({apiClient}: { apiClient: ApiClient }) {
+  const posts = await apiClient.getAllPosts()
+  const users = await apiClient.getAllUsers()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const posts = await apiClient.getAllPosts()
-      const users = await apiClient.getAllUsers()
+  const authorForPost = (post: Post) => users.find((user) => user.id === post.userId)?.name ?? ''
 
-      const authorForPost = (post: Post) => users.find((user) => user.id === post.userId)?.name ?? ''
+  const rowForPost = (post: Post) => ({
+    id: post.id,
+    title: post.title,
+    author: authorForPost(post),
+  })
 
-      const rowForPost = (post: Post) => ({
-        id: post.id,
-        title: post.title,
-        author: authorForPost(post),
-      })
-
-      setPostRows(posts.map(rowForPost))
-    }
-    fetchData()
-  }, [])
+  const postRows = posts.map(rowForPost)
 
   return (
     <ul>
@@ -44,11 +30,7 @@ export default function PostList({apiClient}: PostListProps) {
   )
 }
 
-type RowProps = {
-  row: PostRow,
-}
-
-function Row({row}: RowProps) {
+function Row({row}: { row: PostRow }) {
   return (
     <li
       key={row.id}
