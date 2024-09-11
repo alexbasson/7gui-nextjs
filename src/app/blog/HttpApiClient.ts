@@ -8,21 +8,25 @@ export default class HttpApiClient implements ApiClient {
   getAllPosts = (): Promise<Post[]> =>  {
     return fetch(this.postUrl())
       .then(response => response.json())
+      .catch(e => console.log(e))
   };
 
   getPost(id: number): Promise<Post> {
     return fetch(this.postUrl(id))
       .then(response => response.json())
+      .catch(e => console.log(e))
   }
 
   getAllUsers = (): Promise<User[]> => {
     return fetch(this.userUrl())
       .then(response => response.json())
+      .catch(e => console.log(e))
   };
 
   getUser(id: number): Promise<User> {
     return fetch(this.userUrl(id))
       .then(response => response.json())
+      .catch(e => console.log(e))
   }
 
   private postUrl = (id?: number): string => {

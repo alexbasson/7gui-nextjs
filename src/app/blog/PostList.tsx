@@ -37,10 +37,10 @@ function Row({row}: { row: PostRow }) {
     <li
       key={row.id}
       data-testid="post"
-      className='mb-4'
+      className='mb-4 w-2/3'
     >
-      <h1 className='font-bold'><Link href={'/blog/' + row.id}>{row.title}</Link></h1>
-      <p><Link href={'/blog/authors/' + row.author?.id}>{row.author?.name}</Link></p>
+      <h2 className='font-bold text-xl text-blue-500'><Link href={'/blog/' + row.id}>{row.title}</Link></h2>
+      <p>by <Link className='text-blue-400' href={'/blog/authors/' + row.author?.id}>{row.author?.name}</Link></p>
     </li>
   )
 }

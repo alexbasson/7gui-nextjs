@@ -3,6 +3,9 @@ import HttpApiClient from "@/app/blog/HttpApiClient";
 
 export default function Page() {
   return (
-    <PostList apiClient={new HttpApiClient()} />
+    <div>
+      <h1 className='text-5xl mb-8'>Blog</h1>
+      <PostList apiClient={new HttpApiClient()} />
+    </div>
   )
 }

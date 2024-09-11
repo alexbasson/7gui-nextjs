@@ -1,5 +1,14 @@
-export default function Page({ params }: { params: {blogId: string}}) {
+import HttpApiClient from "@/app/blog/HttpApiClient";
+
+export default async function Page({ params }: { params: {blogId: string}}) {
+  const apiClient = new HttpApiClient()
+
+  const id = parseInt(params.blogId)
+  const post = await apiClient.getPost(id)
+
   return (
-    <h1>blog post id: {params.blogId}</h1>
+    <div>
+      <h1>hello</h1>
+    </div>
   )
 }

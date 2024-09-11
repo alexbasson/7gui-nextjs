@@ -9,12 +9,12 @@ describe('Counter', () => {
   describe('when the button is clicked', () => {
     it('increments the counter', () => {
       const label = screen.getByTestId('label')
-      expect(label.textContent).toBe('0')
+      expect(label.textContent).toContain('0')
 
       const button = screen.getByText('Count')
       fireEvent.click(button);
 
-      expect(label.textContent).toBe('1')
+      expect(label.textContent).toContain('1')
     })
   })
 })

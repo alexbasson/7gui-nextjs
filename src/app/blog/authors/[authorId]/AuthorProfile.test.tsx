@@ -10,5 +10,7 @@ describe('AuthorProfile', () => {
   it('displays author detail information', () => {
     expect(screen.getByText('Alice Awesome')).toBeInTheDocument()
     expect(screen.getByText('Sincere@april.biz')).toBeInTheDocument()
+    expect(screen.getByText('1-770-736-8031 x56442')).toBeInTheDocument()
+    expect(screen.getByText('hildegard.org')).toBeInTheDocument()
   })
 })

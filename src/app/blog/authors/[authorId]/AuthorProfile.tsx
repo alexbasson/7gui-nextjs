@@ -7,6 +7,8 @@ export default async function AuthorProfile({apiClient, id}: {apiClient: ApiClie
     <div>
       <p>{author.name}</p>
       <p>{author.email}</p>
+      <p>{author.phone}</p>
+      <p>{author.website}</p>
     </div>
   )
 }
